@@ -1,0 +1,9 @@
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.Interface.dll
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.Shared.dll
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\log4net.dll
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csprojAssemblyReference.cache
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csproj.CopyComplete
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.WebOps.Library.dll
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.WebOps.Library.pdb
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.dll
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.pdb
