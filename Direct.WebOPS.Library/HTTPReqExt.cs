@@ -9,6 +9,7 @@ using System.Runtime.Remoting.Messaging;
 
 using log4net;
 using Direct.Shared;
+using Direct.Shared.Library;
 using Direct.Interface;
 
 namespace Direct.WebOps.Library
@@ -39,6 +40,8 @@ namespace Direct.WebOps.Library
         protected PropertyHolder<string> _UserAgent = new PropertyHolder<string>("UserAgent");
         protected PropertyHolder<string> _XmlRequest = new PropertyHolder<string>("XmlRequest");
         protected PropertyHolder<string> _XmlResponse = new PropertyHolder<string>("XmlResponse");
+        protected PropertyHolder<int> _ResponseStatusCode = new PropertyHolder<int>("ResponseStatusCode");
+        protected PropertyHolder<string> _ResponseStatusDescription = new PropertyHolder<string>("ResponseStatusDescription");
         protected PropertyHolder<int> _Timeout = new PropertyHolder<int>("Timeout");
         protected PropertyHolder<bool> _PreAuthenticate = new PropertyHolder<bool>("PreAuthenticate");
         protected PropertyHolder<bool> _AllowRedirect = new PropertyHolder<bool>("AllowRedirect");
@@ -65,6 +68,53 @@ namespace Direct.WebOps.Library
         #endregion
 
         #region Operations
+
+        [DirectDom("Download File")]
+        [DirectDomMethod("Download {filepath}")]
+        [MethodDescriptionAttribute("Download File from URL")]
+        public bool downloadfile(string filepath)
+        {
+            using (var client = new WebClient())
+            {
+                //add headers
+                int iCount = this._Headers.Count;
+                string key;
+                string keyvalue;
+                for (int i = 0; i < iCount; i++)
+                {
+                    key = this._Headers.Keys[i];
+                    keyvalue = this._Headers[i];
+                    client.Headers.Add(key, keyvalue);
+                }
+                client.DownloadFile(this.Url, filepath);
+            }
+            return true;
+        }
+
+
+        [DirectDom("URL Encode String")]
+        [DirectDomMethod("URL Encode {string}")]
+        [MethodDescriptionAttribute("URL Encode a string")]
+        public string urlencode(string text)
+        {
+            string result = WebUtility.UrlEncode(text);
+            if (logArchitect.IsDebugEnabled)
+                logArchitect.DebugFormat("HttpRequest.URLEncode - From {0}, To {1}", text, result);
+            return result;
+        }
+
+
+        [DirectDom("URL Decode String")]
+        [DirectDomMethod("URL Decode {string}")]
+        [MethodDescriptionAttribute("URL Decode a string")]
+        public string urldecode(string text)
+        {
+            string result = WebUtility.UrlDecode(text);
+            if (logArchitect.IsDebugEnabled)
+                logArchitect.DebugFormat("HttpRequest.URLDecode - From {0}, To {1}", text, result);
+            return result;
+        }
+
 
         [DirectDom("Add Header")]
         [DirectDomMethod("Add {Header} with {Value} to header of request")]
@@ -119,8 +169,9 @@ namespace Direct.WebOps.Library
                 logArchitect.ErrorFormat("HttpRequest.PostRequest - ERROR!!! WebException - {0}", ex.Message);
                 if (ExceptionEvent != null)
                 {
-                    string message = string.Format("Post Request Error - {0}", ex.Message);
-                    HTTPExceptionEventArgs2 arg = new HTTPExceptionEventArgs2(message, ex.Status.ToString());
+                    HttpStatusCode? status = (ex.Response as HttpWebResponse)?.StatusCode;
+                    string message = string.Format("Post Request Asynchronous Error - {0} - {0}", status, ex.Message);
+                    HTTPExceptionEventArgs2 arg = new HTTPExceptionEventArgs2(message, (int)status);
                     ExceptionEvent(this, arg);
                 }
             }
@@ -130,7 +181,7 @@ namespace Direct.WebOps.Library
                 if (ExceptionEvent != null)
                 {
                     string message = string.Format("Post Request Error - {0}", ex.Message);
-                    HTTPExceptionEventArgs2 arg = new HTTPExceptionEventArgs2(message, "unknown");
+                    HTTPExceptionEventArgs2 arg = new HTTPExceptionEventArgs2(message, 0);
                     ExceptionEvent(this, arg);
                 }
             }
@@ -177,9 +228,11 @@ namespace Direct.WebOps.Library
                 logArchitect.ErrorFormat("HttpRequest.PostRequestAsynchronous - ERROR!!! WebException - {0}", ex.Message);
                 if (ExceptionEvent != null)
                 {
-                    string message = string.Format("Post Request Asynchronous Error - {0}", ex.Message);
-                    HTTPExceptionEventArgs2 arg = new HTTPExceptionEventArgs2(message, ex.Status.ToString());
+                    HttpStatusCode? status = (ex.Response as HttpWebResponse)?.StatusCode;
+                    string message = string.Format("Post Request Asynchronous Error - {0} - {0}", status, ex.Message);
+                    HTTPExceptionEventArgs2 arg = new HTTPExceptionEventArgs2(message, (int)status);
                     ExceptionEvent(this, arg);
+                   
                 }
             }
             catch (System.Exception ex)
@@ -188,7 +241,7 @@ namespace Direct.WebOps.Library
                 if (ExceptionEvent != null)
                 {
                     string message = string.Format("Post Request Asynchronous Error - {0}", ex.Message);
-                    HTTPExceptionEventArgs2 arg = new HTTPExceptionEventArgs2(message, "unknown");
+                    HTTPExceptionEventArgs2 arg = new HTTPExceptionEventArgs2(message, 0);
                     ExceptionEvent(this, arg);
                 }
             }
@@ -275,7 +328,7 @@ namespace Direct.WebOps.Library
             if (Timeout > 0)
                 myRequest.Timeout = Timeout * 1000;
 
-            if (myRequest.Method == "POST" || myRequest.Method == "PUT")
+            if (myRequest.Method == "POST" || myRequest.Method == "PUT" || myRequest.Method == "PATCH")
             {
                 // Get request stream
                 Stream newStream = myRequest.GetRequestStream();
@@ -289,14 +342,18 @@ namespace Direct.WebOps.Library
 
             // Assign the response object of 'HttpWebRequest' to a 'HttpWebResponse' variable.
             HttpWebResponse myHttpWebResponse = (HttpWebResponse)myRequest.GetResponse();
+
             this.ResponseHeaders.RemoveAll();
             for (int i = 0; i < myHttpWebResponse.Headers.Count; i++)
             {
                 this.ResponseHeaders.Add(new HTTPHeader(myHttpWebResponse.Headers.Keys[i], myHttpWebResponse.Headers[i]));
             }
+            this._ResponseStatusCode.TypedValue = (int)myHttpWebResponse.StatusCode;
+            this._ResponseStatusDescription.TypedValue = myHttpWebResponse.StatusDescription.ToString();
+            
             // Display the contents of the page to the console.
             Stream streamResponse = myHttpWebResponse.GetResponseStream();
-
+            
             Encoding InEncoding = Encoding.GetEncoding(this.InboundEncoding);
             // Get stream object
             StreamReader streamRead = new StreamReader(streamResponse, InEncoding);
@@ -349,6 +406,9 @@ namespace Direct.WebOps.Library
             _UserAgent.TypedValue = string.Empty;
             _XmlRequest.TypedValue = string.Empty;
             _XmlResponse.TypedValue = string.Empty;
+            _ResponseStatusCode.TypedValue = 0;
+            _ResponseStatusDescription.TypedValue = string.Empty;
+            
         }
 
         #endregion
@@ -470,20 +530,36 @@ namespace Direct.WebOps.Library
             set { _OutgoingEncoding.TypedValue = value; }
         }
 
-        [DirectDom("Xml Request")]
-        [DesignTimeInfo("Xml Request")]
+        [DirectDom("Request")]
+        [DesignTimeInfo("Request")]
         public string XmlRequest
         {
             get { return _XmlRequest.TypedValue; }
             set { _XmlRequest.TypedValue = value; }
         }
 
-        [DirectDom("Xml Response")]
-        [DesignTimeInfo("Xml Response")]
+        [DirectDom("Response")]
+        [DesignTimeInfo("Response")]
         public string XmlResponse
         {
             get { return _XmlResponse.TypedValue; }
             set { _XmlResponse.TypedValue = value; }
+        }
+
+        [DirectDom("Response StatusCode")]
+        [DesignTimeInfo("Response StatusCode")]
+        public int ResponseStatusCode
+        {
+            get { return _ResponseStatusCode.TypedValue; }
+            set { _ResponseStatusCode.TypedValue = value; }
+        }
+
+        [DirectDom("Response StatusDescription")]
+        [DesignTimeInfo("Response StatusDescription")]
+        public string ResponseStatusDescription
+        {
+            get { return _ResponseStatusDescription.TypedValue; }
+            set { _ResponseStatusDescription.TypedValue = value; }
         }
 
         [DirectDom("Timeout")]
@@ -509,9 +585,9 @@ namespace Direct.WebOps.Library
     {
         string message = string.Empty;
 
-        string status = string.Empty;
+        int status = 0;
 
-        public HTTPExceptionEventArgs2(string message, string status)
+        public HTTPExceptionEventArgs2(string message, int status)
         {
             this.status = status;
             this.message = message;
@@ -524,7 +600,7 @@ namespace Direct.WebOps.Library
         }
 
         [DirectDom("Status")]
-        public string Status
+        public int Status
         {
             get { return status; }
         }
@@ -533,7 +609,7 @@ namespace Direct.WebOps.Library
     #endregion
 
     #region helperTypes
-    [DirectDom("Header", "Custom Utility Library", false)]
+    [DirectDom("Header", "Http Request Extended", false)]
     public class HTTPHeader : DirectComponentBase
     {
         protected PropertyHolder<string> _Name = new PropertyHolder<string>("Name");

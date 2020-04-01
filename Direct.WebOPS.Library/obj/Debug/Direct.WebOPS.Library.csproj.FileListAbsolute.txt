@@ -7,3 +7,9 @@ C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\D
 C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.WebOps.Library.pdb
 C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.dll
 C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.pdb
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.Shared.Library.dll
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Microsoft.mshtml.dll
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.WebServiceProxy.dll
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Newtonsoft.Json.dll
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\RESTSender.dll
+C:\Users\martijn\Documents\GitHub\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Microsoft.Web.Services2.dll
