@@ -46,6 +46,8 @@ namespace Direct.WebOps.Library
         protected PropertyHolder<bool> _PreAuthenticate = new PropertyHolder<bool>("PreAuthenticate");
         protected PropertyHolder<bool> _AllowRedirect = new PropertyHolder<bool>("AllowRedirect");
         protected PropertyHolder<string> _Accept = new PropertyHolder<string>("Accept");
+        protected PropertyHolder<string> _CertPath = new PropertyHolder<string>("Certificate Path");
+        protected PropertyHolder<string> _CertPass = new PropertyHolder<string>("Certificate Password");
         protected PropertyHolder<string> _MediaType = new PropertyHolder<string>("MediaType");
         protected CollectionPropertyHolder<HTTPHeader> _RespHeaders = new CollectionPropertyHolder<HTTPHeader>("ResponseHeaders");
         private NameValueCollection _Headers;
@@ -258,6 +260,7 @@ namespace Direct.WebOps.Library
             this.XmlResponse = value;
         }
 
+
         string InternalPostRequest()
         {
             ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
@@ -282,6 +285,16 @@ namespace Direct.WebOps.Library
             myRequest.AllowAutoRedirect = this.AllowRedirect;
             myRequest.Accept = this.Accept;
             myRequest.MediaType = this.MediaType;
+
+            // Attach the client certificate if https and certPath specified.
+            if (new Uri(this.Url).Scheme == Uri.UriSchemeHttps && this.CertPath != "")
+            {
+                if (logArchitect.IsDebugEnabled)
+                    logArchitect.DebugFormat("HttpRequest - Adding certificate from {1}", this.CertPath);
+                X509Certificate2Collection certificates = new X509Certificate2Collection();
+                certificates.Import(this.CertPath, this.CertPass, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
+                myRequest.ClientCertificates = certificates;
+            }
 
             if (WinAuth == true)
                 myRequest.Credentials = CredentialCache.DefaultCredentials;
@@ -465,6 +478,22 @@ namespace Direct.WebOps.Library
         {
             get { return _ContentType.TypedValue; }
             set { _ContentType.TypedValue = value; }
+        }
+
+        [DirectDom("Certificate Path")]
+        [DesignTimeInfo("Certificate Path")]
+        public string CertPath
+        {
+            get { return _CertPath.TypedValue; }
+            set { _CertPath.TypedValue = value; }
+        }
+
+        [DirectDom("Certificate Password")]
+        [DesignTimeInfo("Certificate Password")]
+        public string CertPass
+        {
+            get { return _CertPass.TypedValue; }
+            set { _CertPass.TypedValue = value; }
         }
 
         [DirectDom("User Name")]
