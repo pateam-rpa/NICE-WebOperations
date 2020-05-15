@@ -172,7 +172,7 @@ namespace Direct.WebOps.Library
                 if (ExceptionEvent != null)
                 {
                     HttpStatusCode? status = (ex.Response as HttpWebResponse)?.StatusCode;
-                    string message = string.Format("Post Request Asynchronous Error - {0} - {0}", status, ex.Message);
+                    string message = string.Format("Post Request Asynchronous Error - {0} - {1}", status, ex.Message);
                     HTTPExceptionEventArgs2 arg = new HTTPExceptionEventArgs2(message, (int)status);
                     ExceptionEvent(this, arg);
                 }
@@ -231,7 +231,7 @@ namespace Direct.WebOps.Library
                 if (ExceptionEvent != null)
                 {
                     HttpStatusCode? status = (ex.Response as HttpWebResponse)?.StatusCode;
-                    string message = string.Format("Post Request Asynchronous Error - {0} - {0}", status, ex.Message);
+                    string message = string.Format("Post Request Asynchronous Error - {0} - {1}", status, ex.Message);
                     HTTPExceptionEventArgs2 arg = new HTTPExceptionEventArgs2(message, (int)status);
                     ExceptionEvent(this, arg);
                    
@@ -286,14 +286,17 @@ namespace Direct.WebOps.Library
             myRequest.Accept = this.Accept;
             myRequest.MediaType = this.MediaType;
 
+            if (logArchitect.IsDebugEnabled)
+                logArchitect.DebugFormat("HttpRequest - Checking if we have a certificate {0} and if the url is https {1}", new Uri(this.Url).Scheme.ToString(), this.CertPath);
             // Attach the client certificate if https and certPath specified.
             if (new Uri(this.Url).Scheme == Uri.UriSchemeHttps && this.CertPath != "")
             {
                 if (logArchitect.IsDebugEnabled)
-                    logArchitect.DebugFormat("HttpRequest - Adding certificate from {1}", this.CertPath);
+                    logArchitect.DebugFormat("HttpRequest - Adding certificate from {0}", this.CertPath);
                 X509Certificate2Collection certificates = new X509Certificate2Collection();
-                certificates.Import(this.CertPath, this.CertPass, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
-                myRequest.ClientCertificates = certificates;
+                //certificates.Import(this.CertPath, this.CertPass, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
+                certificates.Import(this.CertPath, this.CertPass, X509KeyStorageFlags.UserKeySet | X509KeyStorageFlags.PersistKeySet);
+                myRequest.ClientCertificates = certificates; 
             }
 
             if (WinAuth == true)
@@ -414,6 +417,8 @@ namespace Direct.WebOps.Library
             _UserName.TypedValue = string.Empty;
             _Password.TypedValue = string.Empty;
             _ProxyServer.TypedValue = string.Empty;
+            _CertPass.TypedValue = string.Empty;
+            _CertPath.TypedValue = string.Empty;
             _ProxyPort.TypedValue = 0;
             _WinAuth.TypedValue = false;
             _UserAgent.TypedValue = string.Empty;
