@@ -264,6 +264,10 @@ namespace Direct.WebOps.Library
         string InternalPostRequest()
         {
             ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
+            if (new Uri(this.Url).Scheme == Uri.UriSchemeHttps) { 
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            };
 
             if (this.OutgoingEncoding == string.Empty)
                 this.OutgoingEncoding = "iso-8859-8";
