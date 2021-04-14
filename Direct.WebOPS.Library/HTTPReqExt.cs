@@ -146,6 +146,11 @@ namespace Direct.WebOps.Library
             _Headers.Remove(Header);
         }
 
+        private string getResponseBodyFromException(System.Net.WebException exception)
+        {
+            return new StreamReader(exception.Response.GetResponseStream()).ReadToEnd();
+        }
+
         [DirectDom("Post Request")]
         [DirectDomMethod("Post request to a web server")]
         [MethodDescriptionAttribute("Posts a request to a Web Server")]
@@ -168,7 +173,9 @@ namespace Direct.WebOps.Library
             }
             catch (System.Net.WebException ex)
             {
+                string responseBody = getResponseBodyFromException(ex);
                 logArchitect.ErrorFormat("HttpRequest.PostRequest - ERROR!!! WebException - {0}", ex.Message);
+                logArchitect.ErrorFormat("HttpRequest.PostRequest - ERROR!!! WebException - Response Body - {0}", responseBody);
                 if (ExceptionEvent != null)
                 {
                     HttpStatusCode? status = (ex.Response as HttpWebResponse)?.StatusCode;
@@ -227,7 +234,9 @@ namespace Direct.WebOps.Library
             }
             catch (System.Net.WebException ex)
             {
+                string responseBody = getResponseBodyFromException(ex);
                 logArchitect.ErrorFormat("HttpRequest.PostRequestAsynchronous - ERROR!!! WebException - {0}", ex.Message);
+                logArchitect.ErrorFormat("HttpRequest.PostRequest - ERROR!!! WebException - Response Body - {0}", responseBody);
                 if (ExceptionEvent != null)
                 {
                     HttpStatusCode? status = (ex.Response as HttpWebResponse)?.StatusCode;
