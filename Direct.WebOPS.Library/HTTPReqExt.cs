@@ -236,7 +236,7 @@ namespace Direct.WebOps.Library
             {
                 string responseBody = getResponseBodyFromException(ex);
                 logArchitect.ErrorFormat("HttpRequest.PostRequestAsynchronous - ERROR!!! WebException - {0}", ex.Message);
-                logArchitect.ErrorFormat("HttpRequest.PostRequest - ERROR!!! WebException - Response Body - {0}", responseBody);
+                logArchitect.ErrorFormat("HttpRequest.PostRequestAsynchronous - ERROR!!! WebException - Response Body - {0}", responseBody);
                 if (ExceptionEvent != null)
                 {
                     HttpStatusCode? status = (ex.Response as HttpWebResponse)?.StatusCode;
