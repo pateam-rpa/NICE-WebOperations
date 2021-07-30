@@ -241,9 +241,17 @@ namespace Direct.WebOps.Library
             }
             catch (System.Net.WebException ex)
             {
-                string responseBody = getResponseBodyFromException(ex);
-                logArchitect.ErrorFormat("HttpRequest.PostRequestAsynchronous - ERROR!!! WebException - {0}", ex.Message);
-                logArchitect.ErrorFormat("HttpRequest.PostRequestAsynchronous - ERROR!!! WebException - Response Body - {0}", responseBody);
+                if (ex.Response != null)
+                {
+                    string responseBody = getResponseBodyFromException(ex);
+                    logArchitect.ErrorFormat("HttpRequest.PostRequest - ERROR!!! WebException - Response Body - {0}", responseBody);
+                    logArchitect.ErrorFormat("HttpRequest.PostRequest - ERROR!!! WebException - {0}", ex.Message);
+                }
+                else
+                {
+                    logArchitect.ErrorFormat("HttpRequest.PostRequest - ERROR!!! WebException, No response - {0}", ex.Message);
+                    logArchitect.ErrorFormat("HttpRequest.PostRequest - ERROR!!! WebException, Stack Trace - {0}", ex.StackTrace);
+                }
                 if (ExceptionEvent != null)
                 {
                     HttpStatusCode? status = (ex.Response as HttpWebResponse)?.StatusCode;
