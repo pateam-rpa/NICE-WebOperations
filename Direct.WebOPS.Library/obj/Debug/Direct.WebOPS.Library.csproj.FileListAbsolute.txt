@@ -24,8 +24,8 @@ C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug
 C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\RESTSender.dll
 C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Microsoft.Web.Services2.dll
-C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csprojAssemblyReference.cache
 C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csproj.CoreCompileInputs.cache
 C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csproj.CopyComplete
 C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.dll
 C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.pdb
+C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csproj.AssemblyReference.cache
