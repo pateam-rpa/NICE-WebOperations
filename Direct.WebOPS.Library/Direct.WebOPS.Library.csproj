@@ -48,7 +48,7 @@
       <HintPath>..\..\..\..\..\..\Program Files (x86)\NICE Systems\Real-Time Designer\Direct.Shared.Library.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>Referenced\log4net.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
