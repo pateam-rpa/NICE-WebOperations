@@ -29,3 +29,19 @@ C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug
 C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.dll
 C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.pdb
 C:\Users\Mateusz\Source\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csproj.AssemblyReference.cache
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.WebOps.Library.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.WebOps.Library.pdb
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.Interface.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.Shared.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.Shared.Library.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\log4net.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Microsoft.mshtml.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.WebServiceProxy.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\RESTSender.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Microsoft.Web.Services2.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csproj.AssemblyReference.cache
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csproj.CoreCompileInputs.cache
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csproj.CopyComplete
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.pdb
