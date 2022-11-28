@@ -45,3 +45,5 @@ C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperat
 C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOPS.Library.csproj.CopyComplete
 C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.dll
 C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\obj\Debug\Direct.WebOps.Library.pdb
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Connectivity.Shared.dll
+C:\Users\Mateusz\OneDrive - PA Team Software Consulting Ltd\Repos\NICE-WebOperations\Direct.WebOPS.Library\bin\Debug\Direct.Framework.dll
